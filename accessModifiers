@@ -1,0 +1,24 @@
+pragma solidity ^0.5.0;
+
+contract c1{
+    function funcC1() public pure returns (string memory){
+        return "c1-functC1";
+    }
+  /*  
+  functions declared as external cannot be called in contract c1 but it can be called in contract c2
+  function funcC2() external pure returns (string memory){
+        return "c1-functC1";
+    }*/
+    
+    function testExternal() public pure  returns (string memory){
+        return funcC1();
+    } 
+}
+
+contract c2{
+    string public s2 = "hello world";//when the access modifier is public for a state variable it will automatically create a getter function
+    c1 objC1 = new c1();
+    function funcC2() public view returns (string memory){
+    return objC1.funcC1();
+    }
+}
